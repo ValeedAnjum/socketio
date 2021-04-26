@@ -9,17 +9,17 @@ const ChatApp = () => {
   useEffect(() => {
     socket = io.connect(ENDPOINT);
     socket.emit("join", { name: "Valeed", room: "khan" });
-  }, []);
-  const sendMessage = () => {
-    socket.emit("message", { name: "Ali", msg: message });
-    setMessage("");
-  };
-  useEffect(() => {
+
     socket.on("message", (newMsg) => {
       console.log("haha");
       setMessages((msg) => [...msg, newMsg]);
     });
   }, []);
+  const sendMessage = () => {
+    socket.emit("message", { name: "Ali", msg: message });
+    setMessage("");
+  };
+  // useEffect(() => {}, []);
   return (
     <div style={{ width: "300px", margin: "auto" }}>
       <div>
